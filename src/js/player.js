@@ -1530,7 +1530,12 @@ class Player extends Component {
    */
   techCall_(method, arg) {
     // If it's not ready yet, call method when it is
+    if (method === 'setCurrentTime') {
+      return middlewareSetter(this.currentType(), method, arg, this.tech_)
+    }
+
     if (this.tech_ && !this.tech_.isReady_) {
+
       this.tech_.ready(function() {
         this[method](arg);
       }, true);
@@ -1561,6 +1566,10 @@ class Player extends Component {
    */
   techGet_(method) {
     if (this.tech_ && this.tech_.isReady_) {
+
+      if (method in {currentTime:1, duration:1}) {
+        return middlewareGetter(this.currentType(), method, this.tech_);
+      }
 
       // Flash likes to die and reload when you hide or reposition it.
       // In these cases the object methods go away and we get errors.
