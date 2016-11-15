@@ -2412,6 +2412,7 @@ class Player extends Component {
       console.log(tech.name, src, mws);
       this.middleware_ = mws;
       this.loadTech_(tech.name, src)
+      middleware.setTech(mws, this.tech_);
     });
 
     return this;
