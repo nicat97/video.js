@@ -1533,7 +1533,7 @@ class Player extends Component {
   techCall_(method, arg) {
     // If it's not ready yet, call method when it is
     if (method in middleware.allowedSetters) {
-      return this.middlewareSet(method, arg)
+      return this.middlewareSet(method, arg);
     }
 
     if (this.tech_ && !this.tech_.isReady_) {
@@ -1598,13 +1598,13 @@ class Player extends Component {
   }
 
   middlewareIterator(method) {
-  return (value, mw) => {
+    return (value, mw) => {
       if (mw[method]) {
         return mw[method](value);
       }
 
       return value;
-    }
+    };
   }
 
   middlewareSet(method, arg) {
@@ -2413,25 +2413,27 @@ class Player extends Component {
     this.cache_.src = source.src;
 
     let src = source;
+
     if (Array.isArray(source)) {
       src = source[0];
     } else if (typeof source === 'string') {
-      const ext = source.split('.')[1]
+      const ext = source.split('.')[1];
+
       src = {
         src: source,
         type: ext === 'm3u8' ? 'application/x-mpegurl' : 'video/' + ext
-      }
+      };
     }
 
-    middleware.setSource(src, (tech, src, mws) => {
-      console.log(tech.name, src, mws);
+    middleware.setSource(src, (tech, src_, mws) => {
       this.middleware_ = mws;
-      this.loadTech_(tech.name, src)
+      this.loadTech_(tech.name, src_);
       middleware.setTech(mws, this.tech_);
     });
 
     return this;
 
+    /*
     let currentTech = Tech.getTech(this.techName_);
 
     // Support old behavior of techs being registered as components.
@@ -2491,6 +2493,7 @@ class Player extends Component {
     }
 
     return this;
+    */
   }
 
   /**
