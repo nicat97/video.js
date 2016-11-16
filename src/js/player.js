@@ -2414,8 +2414,6 @@ class Player extends Component {
       this.cache_.sources = source;
       src = source[0];
     } else if (typeof source === 'string') {
-      const ext = source.split('.')[1];
-
       src = {
         src: source
       };
