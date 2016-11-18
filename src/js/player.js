@@ -1533,7 +1533,7 @@ class Player extends Component {
   techCall_(method, arg) {
     // If it's not ready yet, call method when it is
     if (method in middleware.allowedSetters) {
-      return this.middlewareSet(method, arg);
+      return middleware.set(this.middleware_, method, arg);
     }
 
     if (this.tech_ && !this.tech_.isReady_) {
@@ -1570,7 +1570,7 @@ class Player extends Component {
     if (this.tech_ && this.tech_.isReady_) {
 
       if (method in middleware.allowedGetters) {
-        return this.middlewareGet(method, this.tech_);
+        return middleware.get(this.middleware_, method);
       }
 
       // Flash likes to die and reload when you hide or reposition it.
@@ -1595,24 +1595,6 @@ class Player extends Component {
     }
 
     return;
-  }
-
-  middlewareIterator(method) {
-    return (value, mw) => {
-      if (mw[method]) {
-        return mw[method](value);
-      }
-
-      return value;
-    };
-  }
-
-  middlewareSet(method, arg) {
-    return this.middleware_.reduce(this.middlewareIterator(method), arg);
-  }
-
-  middlewareGet(method) {
-    return this.middleware_.reduceRight(this.middlewareIterator(method), undefined);
   }
 
   /**
