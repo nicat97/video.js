@@ -342,11 +342,6 @@ videojs.getTech = Tech.getTech;
  * @borrows Tech.registerTech as videojs.registerTech
  */
 videojs.registerTech = function(name, tech) {
-  middlewareUse('*', {
-    name,
-    canPlayType: tech.canPlayType
-  });
-
   Tech.registerTech(name, tech);
 }
 
@@ -778,16 +773,3 @@ videojs.computedStyle = computedStyle;
 module.exports = videojs;
 
 videojs.use = middlewareUse;
-
-videojs.use('*', {
-  name: 'Html5',
-  canPlayType(type) {
-    return document.createElement('video').canPlayType(type);
-  }
-});
-videojs.use('*', {
-  name: 'Flash',
-  canPlayType(type) {
-    return Flash.nativeSourceHandler.canPlayType(type);
-  }
-});
