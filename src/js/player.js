@@ -2477,6 +2477,7 @@ class Player extends Component {
 
     return;
 
+    /*
     let currentTech = Tech.getTech(this.techName_);
 
     // Support old behavior of techs being registered as components.
@@ -2513,6 +2514,7 @@ class Player extends Component {
     }
 
     return this;
+    */
   }
 
   /**
