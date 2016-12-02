@@ -115,6 +115,8 @@ class Tech extends Component {
     });
 
     this.textTracks_ = options.textTracks;
+    this.remoteTextTrack_ = options.remoteTextTracks;
+    this.remoteTextTrackEls_ = options.remoteTextTrackEls;
     this.videoTracks_ = options.videoTracks;
     this.audioTracks_ = options.audioTracks;
 
